@@ -3,6 +3,7 @@ using Api.Entities;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
@@ -17,9 +18,9 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<AppUser>> GetUsers() => _context.Users.ToList();
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() => await _context.Users.ToListAsync();
 
         [HttpGet("{id}")]
-        public ActionResult<AppUser> GetUser(int id) => _context.Users.Find(id);
+        public async Task<ActionResult<AppUser>> GetUser(int id) => await _context.Users.FindAsync(id);
     }
 }
